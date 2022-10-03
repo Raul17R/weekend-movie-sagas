@@ -27,6 +27,6 @@ function MovieDetails () {
         </div>
        </div>
   
-    )
+    );
 }
 export default MovieDetails;
