@@ -29,6 +29,16 @@ function* fetchAllMovies() {
         
 }
 
+//getting details?
+function* getDetails() {
+    try{
+        const details = yield axios.get(`/api/genre/all`);
+        console.log('Details', details.data);
+    }catch(error) {
+        console.log('Error in details get', error)
+    }
+}
+
 function* fetchMovieGenre(action) {
     const movieId = action.payload;
     console.log(movieId);
@@ -67,11 +77,21 @@ const genres = (state = [], action) => {
 
 //Selected Movie??
 
+const selectedMovie = (state = {}, action) => {
+    switch (action.type){
+        case 'SELECTED_MOVIE':
+        return action.payload;
+        default:
+            return state;
+    }
+};
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        selectedMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

@@ -19,7 +19,11 @@ function MovieDetails () {
 
         <div>
             <h2>{movie.title}</h2>
-            <img src={movie.title} />
+            <img src={movie.poster} />
+            <h3>Description: </h3>
+            <p>{movie.description}</p>
+            <h3>Genres: </h3>
+            {genres.map((genre) => `${genre.name}`)}
         </div>
        </div>
   
