@@ -29,6 +29,19 @@ function* fetchAllMovies() {
         
 }
 
+function* fetchMovieGenre(action) {
+    const movieId = action.payload;
+    console.log(movieId);
+    try{//sending data 
+        const genres = yield axios.get(`/api/genre/${action.payload}`);
+        yield put ({type: 'SET_GENRES', payload: genres.data});
+    } catch(error){
+        console.log('Error in fetchMovieGenre', error);
+        alert ('Something went wrong, check console');
+    }
+
+}
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -51,6 +64,8 @@ const genres = (state = [], action) => {
             return state;
     }
 }
+
+//Selected Movie??
 
 // Create one store that all components can use
 const storeInstance = createStore(
